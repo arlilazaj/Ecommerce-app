@@ -4,14 +4,44 @@ import banner from "/public/images/banner3.jpg";
 import sec from "/public/images/sec.jpg";
 import chair from "/public/images/3.jpg";
 import chair2 from "/public/images/chair.png.jpg";
-import clock from "/public/images/clock.jpg";
+import clock from "../public/images/clock.jpg";
+import banner1 from "../public/images/banner.jpg";
+import banner2 from "../public/images/banner1.jpg";
+import brand1 from "../public/images/brand1.jpg";
+import brand2 from "../public/images/brand2.jpg";
+import brand3 from "../public/images/brand3.jpg";
 import { FaArrowRight } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import { IoReload } from "react-icons/io5";
 import { BsCreditCardFill } from "react-icons/bs";
 import { HiOutlineSupport } from "react-icons/hi";
-import Products from "./components/Products";
-export default function Home() {
+
+import ProductsCard from "./components/ProductsCard";
+import APIServer, { FetchResponse } from "./services/api-server";
+import { Products } from "./entites/Products";
+import { Category } from "./entites/Category";
+import Product1 from "./components/Product1";
+export const getProducts = async () => {
+  const apiServer = new APIServer();
+  const response: FetchResponse<Products> = await apiServer.getAll(
+    "ProductApi/getProducts"
+  );
+
+  return response.result;
+};
+export const getCategories = async () => {
+  const apiServer = new APIServer();
+  const response: FetchResponse<Category> = await apiServer.getAll(
+    "CategoryApi/getCategory"
+  );
+
+  return response.result;
+};
+
+async function Home() {
+  const products = await getProducts();
+  const categories = await getCategories();
+  console.log(categories);
   return (
     <main>
       <div className="bg-slate-100 w-full flex items-center justify-center py-10 ">
@@ -122,7 +152,57 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Products />
+      <ProductsCard
+        categories={categories}
+        exludedCategories={[5, 6, 14, 7, 8]}
+      />
+
+      <div className="mt-20  w-full flex items-center justify-center  my-10">
+        <div className="w-[70%] flex md:justify-between space-x-3">
+          <div className="flex">
+            <Image src={banner2} alt="chair2" />
+            <div className="text-center absolute py-10 px-80">
+              <h1 className="text-sm text-red-800 font-bold">
+                Living Room Set
+              </h1>
+              <h1 className="font-bold">Hajdfhdhp playodd</h1>
+              <h1 className="font-bold">New Chair</h1>
+              <button className="btn btn-neutral rounded-full ">
+                Shop now
+              </button>
+            </div>
+          </div>
+          <div className="flex">
+            <Image src={banner1} alt="chair2" />
+            <div className="text-center absolute py-10 px-72 ">
+              <h1 className="text-sm text-red-800 font-bold">Home decor</h1>
+              <h1 className="font-bold">The best clock</h1>
+              <h1 className="font-bold">Creative furniture</h1>
+              <button className="btn btn-neutral rounded-full">Shop now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Product1
+        categories={categories}
+        exludedCategories={[1, 2, 4, 3, 7, 8]}
+      />
+
+      <div className="mt-20  w-full flex items-center justify-center  my-10  ">
+        <div className="w-[70%] flex justify-evenly border border-slate-200 p-3 rounded-md ">
+          <Image src={brand1} alt="brand1" />
+
+          <Image src={brand2} alt="brand2" />
+
+          <Image src={brand3} alt="brand3" />
+
+          <Image src={brand2} alt="brand2" />
+          <Image src={brand1} alt="brand1" />
+          <Image src={brand3} alt="brand3" />
+        </div>
+      </div>
     </main>
   );
 }
+export default Home;
