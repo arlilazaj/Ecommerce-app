@@ -9,6 +9,7 @@ import RatingStars from "./RatingStars";
 import { Category } from "../entites/Category";
 import { Products } from "../entites/Products";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   categories: Category[];
@@ -17,7 +18,7 @@ interface Props {
 const Product1 = ({ categories, exludedCategories }: Props) => {
   return (
     <div className="w-full flex items-center justify-center mt-10">
-      <div className="w-[70%] flex  justify-between  ">
+      <div className="w-[70%] flex  justify-between space-x-3  ">
         {categories.map((cat) => {
           if (!exludedCategories.includes(cat.id)) {
             return (
@@ -35,12 +36,14 @@ const Product1 = ({ categories, exludedCategories }: Props) => {
                       key={product.id}
                       className="flex border border-slate-200 rounded p-4 space-y-2 mb-2 "
                     >
-                      <Image
-                        src={`data:image/jpeg;base64,${product.image}`}
-                        width={150}
-                        height={300}
-                        alt="divan"
-                      />
+                      <Link href={"/SingleProduct/" + product.id}>
+                        <Image
+                          src={`data:image/jpeg;base64,${product.image}`}
+                          width={400}
+                          height={500}
+                          alt="divan"
+                        />
+                      </Link>
                       <div className="flex flex-col items-center pt-4">
                         <span className="font-bold text-red-800">
                           {product.price}

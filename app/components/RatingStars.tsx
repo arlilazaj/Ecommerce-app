@@ -1,5 +1,5 @@
 import React from "react";
-import { CiStar } from "react-icons/ci";
+import { IoStar } from "react-icons/io5";
 interface Props {
   rating: number;
 }
@@ -9,10 +9,10 @@ const RatingStars = ({ rating }: Props) => {
     for (let i = 1; i <= 5; i++) {
       const isFilled = i <= rating;
       stars.push(
-        <CiStar
+        <IoStar
           key={i}
           className="size-8"
-          style={{ color: isFilled ? "yellow" : "gray" }}
+          style={{ color: isFilled ? "orange" : "#D3D3D3" }}
         />
       );
     }

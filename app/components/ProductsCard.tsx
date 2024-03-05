@@ -40,8 +40,8 @@ const ProductsCard = ({ exludedCategories, categories }: Props) => {
                       <Link href={"/SingleProduct/" + product.id}>
                         <Image
                           src={`data:image/jpeg;base64,${product.image}`}
-                          width={300}
-                          height={400}
+                          width={400}
+                          height={500}
                           alt="divan"
                         />
                       </Link>

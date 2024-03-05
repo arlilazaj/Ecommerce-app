@@ -7,9 +7,7 @@ import chair2 from "/public/images/chair.png.jpg";
 import clock from "../public/images/clock.jpg";
 import banner1 from "../public/images/banner.jpg";
 import banner2 from "../public/images/banner1.jpg";
-import brand1 from "../public/images/brand1.jpg";
-import brand2 from "../public/images/brand2.jpg";
-import brand3 from "../public/images/brand3.jpg";
+
 import { FaArrowRight } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import { IoReload } from "react-icons/io5";
@@ -21,10 +19,16 @@ import APIServer, { FetchResponse } from "./services/api-server";
 import { Products } from "./entites/Products";
 import { Category } from "./entites/Category";
 import Product1 from "./components/Product1";
+import Brand from "./components/Brand";
+import { getSession } from "next-auth/react";
+
 export const getProducts = async () => {
   const apiServer = new APIServer();
-  const response: FetchResponse<Products> = await apiServer.getAll(
-    "ProductApi/getProducts"
+  const response: FetchResponse<Products> = await apiServer.getAllProducts(
+    "ProductApi/getProducts",
+    0,
+    1,
+    ""
   );
 
   return response.result;
@@ -41,7 +45,7 @@ export const getCategories = async () => {
 async function Home() {
   const products = await getProducts();
   const categories = await getCategories();
-  console.log(categories);
+
   return (
     <main>
       <div className="bg-slate-100 w-full flex items-center justify-center py-10 ">
@@ -189,19 +193,7 @@ async function Home() {
         exludedCategories={[1, 2, 4, 3, 7, 8]}
       />
 
-      <div className="mt-20  w-full flex items-center justify-center  my-10  ">
-        <div className="w-[70%] flex justify-evenly border border-slate-200 p-3 rounded-md ">
-          <Image src={brand1} alt="brand1" />
-
-          <Image src={brand2} alt="brand2" />
-
-          <Image src={brand3} alt="brand3" />
-
-          <Image src={brand2} alt="brand2" />
-          <Image src={brand1} alt="brand1" />
-          <Image src={brand3} alt="brand3" />
-        </div>
-      </div>
+      <Brand />
     </main>
   );
 }

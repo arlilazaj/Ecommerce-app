@@ -6,6 +6,8 @@ import { CiHeart } from "react-icons/ci";
 import { MdLuggage } from "react-icons/md";
 import { TbCategoryFilled } from "react-icons/tb";
 import CustomSelect from "./components/CustomSelect";
+import LoggedinUser from "./components/LoggedinUser";
+import SearchBar from "./components/SearchBar";
 const NavBar = () => {
   return (
     <>
@@ -17,15 +19,15 @@ const NavBar = () => {
           </h1>
           <ul className="flex justify-between space-x-5 font-sans">
             <Link className="hover:text-yellow-400" href={"/"}>
-              MY ACCOUNT
+              HOME
             </Link>
-            <Link href={"/"} className="hover:text-yellow-400">
+            <Link href={"/pages/Cart"} className="hover:text-yellow-400">
               CART
             </Link>
-            <Link href={"/"} className="hover:text-yellow-400">
+            <Link href={"/pages/Wishlist"} className="hover:text-yellow-400">
               WISHLIST
             </Link>
-            <Link href={"/"} className="hover:text-yellow-400">
+            <Link href={"/pages/Checkout"} className="hover:text-yellow-400">
               CHECKOUT
             </Link>
           </ul>
@@ -43,11 +45,7 @@ const NavBar = () => {
           </div>
           <div>
             <div className="flex justify-center items-center">
-              <input
-                type="text"
-                className="border-solid border-2  border-orange-400 rounded-full h-9 p-4 text-xs w-64"
-                placeholder=" Search Product"
-              />
+              <SearchBar />
               <IoMdSearch className="absolute ml-48" />
             </div>
           </div>
@@ -67,14 +65,10 @@ const NavBar = () => {
             <TbCategoryFilled />
             <h1 className="font-bold">All Department</h1>
           </div>
-          <div className="flex items-center justify-cenetr  ">
+          <div className="flex items-center   ">
             <CustomSelect />
           </div>
-          <div className="flex items-center space-x-2">
-            <Link href={"/"}>Login</Link>{" "}
-            <span className="text-slate-400">or</span>
-            <Link href={"/"}>Register</Link>
-          </div>
+          <LoggedinUser />
         </div>
       </div>
     </>
